@@ -1,0 +1,70 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Css{
+    <style>
+
+        .m-portlet__body {
+            padding-top: 0px !important;
+        }
+
+        .dt-buttons {
+            margin-top: 12px
+        }
+
+        div.m-input-icon.m-input-icon--left {
+            border: 1px solid #bebebe
+        }
+
+        .checkbox {
+            -webkit-transform: scale(1.1, 1.1)
+        }
+    </style>
+}
+
+<div class="kt-portlet kt-portlet--mobile">
+    <div class="kt-portlet__head kt-portlet__head--lg">
+        <div class="kt-portlet__head-label">
+            <span class="kt-portlet__head-icon">
+                <i class="kt-font-brand flaticon2-user"></i>
+            </span>
+            <h4 class="kt-portlet__head-title">
+                صفحتي الشخصية
+            </h4>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+        <div class="row">
+            <div class="col-md-6">
+                <form id="profile-form" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="userProfile.FullName"></label>
+                        <input asp-for="userProfile.FullName" class="form-control" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="userProfile.Username"></label>
+                        <input asp-for="userProfile.Username" class="form-control" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.PhoneNumber"></label>
+                        <input asp-for="Input.PhoneNumber" class="form-control" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

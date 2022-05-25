@@ -1,0 +1,97 @@
+﻿@model TayarDelivery.Models.ViewModel.Orders.BillErsaliaVM
+@{
+    ViewData["Title"] = "ارسالية";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] - NARD</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+        }
+
+        .text-table {
+            font-size: 17px !important
+        }
+
+        .text-footer {
+            font-size: 15px !important
+        }
+
+        .card {
+            border: 0.5px solid #e6e6e6
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <br />
+    <br />
+    <div class="container" dir="rtl">
+        <main role="main">
+            <div class="row printDetails">
+                <div class="col-4 col-xs-4" style="padding-top:80px">
+                    <h4><b>اسم الموزع :</b></h4>
+                    <h4><b>رقم السيارة :</b></h4>
+                </div>
+                <div class="col-4 col-xs-4 text-center">
+                    <h3>كشف التوزيع</h3>
+                    <h4>رقم مشغل مرخص : <b>00000</b></h4>
+                    <h4 style="text-align:right;margin-top:30px">التاريخ :......................</h4>
+                </div>
+                <div class="col-4 col-xs-4 text-center">
+                    <img src="~/files/Default/LOGO_f_small.png" style="width:100px" />
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-xs-12">
+                    <table style="width:100%">
+                        <tr>
+                            <th class="text-table text-center">#</th>
+                            <th class="text-table text-center">الرقم التسلسلي</th>
+                            <th class="text-table text-center">اسم المرسل</th>
+                            <th class="text-table text-center">رقم المرسل</th>
+                            <th class="text-table text-center">اسم المستقبل</th>
+                            <th class="text-table text-center">رقم المستقبل</th>
+                            <th class="text-table text-center">العنوان</th>
+                            <th class="text-table text-center">المبلغ الكلي</th>
+                            <th class="text-table text-center">الملاحظات</th>
+                        </tr>
+                        @for (int i = 0; i < Model.listOrders.Count; i++)
+                        {
+                            <tr>
+                                <td class="text-table text-center">@(i+1)</td>
+                                <td class="text-table text-center">@Model.listOrders[i].SerialNumber</td>
+                                <td class="text-table text-center">بيسان الخليل</td>
+                                <td class="text-table text-center">0599544215</td>
+                                <td class="text-table text-center">@Model.listOrders[i].NameReceiver</td>
+                                <td class="text-table text-center">@Model.listOrders[i].PhoneNumberReceiver</td>
+                                <td class="text-table text-center">@Model.listOrders[i].Address</td>
+                                <td class="text-table text-center">@Model.listOrders[i].TotalPrice</td>
+                                <td class="text-table text-center">...................</td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+            <br />
+        </main>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

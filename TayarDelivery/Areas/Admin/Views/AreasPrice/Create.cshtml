@@ -1,0 +1,64 @@
+﻿@model TayarDelivery.Models.ViewModel.AreasPriceVM
+
+@{
+    ViewData["Title"] = "اضافة منطقة";
+    Layout = null;
+}
+<style>
+    .checkbox {
+        -webkit-transform: scale(1.5, 1.5)
+    }
+</style>
+<form asp-action="Create" method="post" class="ajaxForm" tname="#dataTableId">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="DealerAreaId" class="form-control-label"></label>
+                <select asp-for="DealerAreaId" asp-items="ViewBag.ListAreas" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
+                    <option value="">اختر المنطقة</option>
+                </select>
+                <span asp-validation-for="DealerAreaId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ReceverAreaId" class="form-control-label"></label>
+                <select asp-for="ReceverAreaId" asp-items="ViewBag.ListAreas" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
+                    <option value="">اختر المنطقة</option>
+                </select>
+                <span asp-validation-for="ReceverAreaId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="form-group">
+                <label for="CanDiscount" asp-for="CanDiscount" class="form-control-label"></label>
+                <div class="checkbox-list pt-2">
+                    <input class="checkbox" asp-for="CanDiscount" type="checkbox">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="Price" asp-for="Price" class="form-control-label"></label>
+                <input asp-for="Price" class="form-control">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="DiscountPriceWhenReturn" asp-for="DiscountPriceWhenReturn" class="form-control-label"></label>
+                <input asp-for="DiscountPriceWhenReturn" class="form-control">
+                <span asp-validation-for="DiscountPriceWhenReturn" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="rounded btn btn-secondary" data-dismiss="modal">اغلاق</button>
+    <button type="submit" class="rounded btn btn-primary">ارسال</button>
+</form>
+<script>
+    $('.selectpicker').selectpicker();
+    PageLoadActions();
+</script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

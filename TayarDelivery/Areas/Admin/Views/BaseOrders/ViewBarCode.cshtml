@@ -1,0 +1,16 @@
+﻿@model string
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md text-center">
+        @if (!String.IsNullOrEmpty(Model))
+        {
+            <barcode content="@Model" width="300" height="180" />
+        }
+    </div>
+</div>
+
+<button type="button" class="rounded btn btn-secondary" data-dismiss="modal">اغلاق</button>
+

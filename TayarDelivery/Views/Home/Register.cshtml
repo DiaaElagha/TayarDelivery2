@@ -1,0 +1,105 @@
+﻿@model TayarDelivery.Models.ViewModel.Home.HomeVM
+@{
+    ViewData["Title"] = "تسجيل جديد";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+@section Css{
+    <style>
+        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: #696969 !important;
+        }
+    </style>
+}
+
+<!-- ================ contact section start ================= -->
+<section class="contact-section" id="ContactUs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-right">
+                <img src="~/files/Default/LOGO_f_small.png" width="45px" /><small class="pr-3  text-stand">نرد للخدمات اللوجستية والبريد السريع</small>
+                <h4 class="pt-3 pb-3">سجل معلومات التواصل معك</h4>
+
+            </div>
+            <div class="col-lg-8 text-right">
+                <form class="form-contact" id="contactForm">
+                    <div class="row">
+                        <div class="col-12 col-12">
+                            <div class="form-group">
+                                <input class="form-control rounded" asp-for="RegisterVM.NameSocial" placeholder="اسم صفحتك على الفيسبوك / انستقرام">
+                                <span asp-validation-for="RegisterVM.NameSocial" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <input class="form-control rounded" asp-for="RegisterVM.Email" placeholder="البريد الالكتروني">
+                                <span asp-validation-for="RegisterVM.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <input class="form-control rounded" asp-for="RegisterVM.FullName" placeholder="الاسم كامل">
+                                <span asp-validation-for="RegisterVM.FullName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <input class="form-control rounded" asp-for="RegisterVM.City" placeholder="المدينة">
+                                <span asp-validation-for="RegisterVM.City" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <input class="form-control rounded" asp-for="RegisterVM.Phone" placeholder="رقم الهاتف">
+                                <span asp-validation-for="RegisterVM.Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div style="display:none" class="error-message text-danger">عذرا لقد حدث خطأ ما</div>
+                        <div style="display:none" class="sent-message text-success">تم ارسال طلبك بنجاح . شكرا لك</div>
+                    </div>
+                    <div class="form-group mt-1 text-center">
+                        <button id="contactUsSubmit" type="button" class="button button-contactForm boxed-btn rounded text-stand border-color bg-color-hover p-2 pl-5 pr-5">ارسال</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ contact section end ================= -->
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).on("click", "#contactUsSubmit", function (e) {
+            if ($("#contactForm").valid()) {
+                var form = jQuery('#contactForm')[0];
+                var data = new FormData(form);
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/Home/Register',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response == "success") {
+                            $('.sent-message').show();
+                            $('.error-message').hide();
+                            form.reset();
+                        }
+                        else {
+                            $('.error-message').show();
+                            $('.sent-message').hide();
+                        }
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        $('.error-message').show();
+                        $('.sent-message').hide();
+                    }
+                });
+            }
+        });
+
+    </script>
+}

@@ -1,0 +1,70 @@
+﻿@model TayarDelivery.Models.ViewModel.Mail.SendNotficationVM
+
+@{
+    ViewData["Title"] = "ارسال اشعار";
+    Layout = null;
+}
+
+<form asp-action="SendNotfication" method="post" class="ajaxForm" tname="#dataTableId">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="Title" asp-for="Title" class="form-control-label"></label>
+                <input asp-for="Title" class="form-control">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label">نوع المستخدم</label>
+                <select id="userTypeList" asp-items="ViewBag.UsersTypeList" data-size="6" class="rounded selectpicker" data-width="100%">
+                    <option value="">اختر النوع</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-group">
+                <label asp-for="ReceversId" class="form-control-label"></label>
+                <select asp-for="ReceversId" title="اختر المستقبلين" id="userList" multiple data-actions-box="true" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
+                </select>
+                <span asp-validation-for="ReceversId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="Latitude" asp-for="Messege" class="form-control-label"></label>
+                <textarea asp-for="Messege" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Messege" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="rounded btn btn-secondary" data-dismiss="modal">اغلاق</button>
+    <button type="submit" class="rounded btn btn-primary">ارسال</button>
+</form>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script>
+    $('.selectpicker').selectpicker();
+    PageLoadActions();
+</script>
+<script>
+
+    $('#userTypeList').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+        console.log("YES");
+        $('#userList option').remove();
+        $("#userList").selectpicker('refresh');
+        $.ajax({
+            url: '/Admin/Home/GetUsersByType/' + $('#userTypeList').val(),
+            dataType: "json",
+            success: function (Data) {
+                console.log(Data);
+                $(Data).each(function (index, value) {
+                    $("#userList").append($("<option></option>").val(value.Id).html(value.FullName)).selectpicker('refresh');
+                })
+            }
+        });
+    });
+
+</script>

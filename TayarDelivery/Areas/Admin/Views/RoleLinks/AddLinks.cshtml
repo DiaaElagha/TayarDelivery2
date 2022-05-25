@@ -1,0 +1,175 @@
+﻿
+@model TayarDelivery.Models.ViewModel.Auth.RoleLinksVM
+@{
+    ViewData["Title"] = "تحديد شاشات";
+}
+
+@section Css{
+    <style>
+        td {
+            padding: 8px 1px 8px 1px !important;
+            font-size: 14px !important;
+        }
+
+        th {
+            font-weight: bold;
+            font-size: medium;
+        }
+
+        td a {
+            margin-left: 5px !important;
+        }
+
+        .m-portlet__body {
+            padding-top: 0px !important;
+        }
+
+        .dt-buttons {
+            margin-top: 12px
+        }
+
+        div.m-input-icon.m-input-icon--left {
+            border: 1px solid #bebebe
+        }
+
+        .card {
+            border: 0.1px solid rgba(235, 235, 235, 0.76);
+        }
+
+            .card:hover {
+                background-color: #f9f9f9 !important
+            }
+
+        .checkbox {
+            -webkit-transform: scale(1.2, 1.2)
+        }
+    </style>
+}
+
+@if (@Model.Role != null)
+{
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand flaticon2-user-1"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                    <span style="color: #ebebeb"></span>تحديد شاشات لصلاحية : @Model.Role.Title   |  <small style="color : gray">عرض وتعديل الوصول  </small>
+                </h3>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            @if (ViewBag.msg != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong style="font-size:15px;padding-right:20px">@ViewBag.msg</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <form asp-action="AddLinks" method="post" class="">
+                <input name="id" value="@Model.Role.Id" type="hidden" />
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="m-form__group form-group" style="margin-right:15px;padding-top:10px">
+                            <div class="custom-control  custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="check_all">
+                                <label class="checkbox custom-control-label" for="check_all"> <b style="color:#3c9816">تحديد الكل</b></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 text-right">
+                        <button type="submit" class="m-btn--sm btn btn-success m-btn m-btn--custom m-btn--icon m-btn--pill">
+                            <span>
+                                <i class="fa fa-save"></i>
+                                <span style="font-size:14px">حفظ التغيرات</span>
+                            </span>
+                        </button>
+
+                        <a href="~/Admin/RoleLinks/DeleteLinks?roleid=@Model.Role.Id" title="حذف جميع الصفحات لهذه الصلاحية" style="margin-right:20px" class="Confirm m-btn--sm btn btn-danger m-btn m-btn--custom m-btn--icon m-btn--pill">
+                            <span>
+                                <i class="fa fa-trash"></i>
+                                <span style="font-size:14px">حذف جميع الصفحات</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <br />
+                @for (int i = 0; i < Model.GroupLinks.Count; i++)
+                {
+                    <div class="card shadow-sm bg-white rounded mt-2" style="width: 100%;">
+                        @if (@Model.GroupLinks[i].links != null)
+                        {
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-2 text-center text-primary" style="border-left : 0.5px solid #bebebe;font-size:14px;margin-left:20px">
+                                        <b>@Model.GroupLinks[i].parintName</b>
+                                        <div class="m-form__group form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input check-all-in-card" id="@i-check_card">
+                                                <label class="custom-control-label" for="@i-check_card"> <span style="color:#3c9816;font-size:10px">تحديد الحالي</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <div class="row">
+                                            @for (int j = 0; j < Model.GroupLinks[i].links.Count; j++)
+                                            {
+                                                <div class="col-6 col-md-3 pt-1">
+                                                    <div class="form-check">
+                                                        <input name="links" class="form-check-input Item"
+                                                               value="@Model.GroupLinks[i].links[j].Id"
+                                                               type="checkbox"
+                                                               checked="@Model.GroupLinks[i].links[j].IsShow"
+                                                               id="defaultCheck_@Model.GroupLinks[i].links[j].Id">
+                                                        <label class="form-check-label" for="defaultCheck_@Model.GroupLinks[i].links[j].Id">
+                                                            @if (Model.GroupLinks[i].links[j].Title.Equals(Model.GroupLinks[i].parintName))
+                                                            {
+                                                                @Model.GroupLinks[i].links[j].Title <b>(الرئيسية)</b>
+                                                            }
+                                                            else
+                                                            {
+                                                                @Model.GroupLinks[i].links[j].Title
+                                                            }
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </form>
+            <br />
+        </div>
+    </div>
+
+
+}
+
+@section Scripts{
+    <script>
+        $("#check_all").change(function () {
+            if (this.checked) {
+                $(".Item").prop('checked', true);
+            } else {
+                $(".Item").prop('checked', false);
+            }
+        });
+
+        $(".check-all-in-card").change(function () {
+            if (this.checked) {
+                $(this).closest('.card-body').find('.Item').prop('checked', true);
+            } else {
+                $(this).closest('.card-body').find('.Item').prop('checked', false);
+            }
+        });
+
+    </script>
+
+}

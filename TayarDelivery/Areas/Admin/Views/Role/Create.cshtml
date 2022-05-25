@@ -1,0 +1,38 @@
+﻿@model TayarDelivery.Models.ViewModel.Auth.RoleVM
+
+@{
+    ViewData["Title"] = "اضافة صلاحية";
+    Layout = null;
+}
+<style>
+    .checkbox {
+        -webkit-transform: scale(1.5, 1.5)
+    }
+</style>
+<form asp-action="Create" method="post" class="ajaxForm" tname="#dataTableId">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="Title" asp-for="Title" class="form-control-label"></label>
+                <input asp-for="Title" class="form-control">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="IsActive" asp-for="IsActive" class="form-control-label"></label>
+                <div class="checkbox-list pt-2">
+                    <input class="checkbox" asp-for="IsActive" type="checkbox">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="rounded btn btn-secondary" data-dismiss="modal">اغلاق</button>
+    <button type="submit" class="rounded btn btn-primary">ارسال</button>
+</form>
+<script>
+    PageLoadActions();
+</script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

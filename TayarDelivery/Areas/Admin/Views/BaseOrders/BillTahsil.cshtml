@@ -1,0 +1,122 @@
+﻿@model TayarDelivery.Models.ViewModel.Orders.BillTahsilVM
+@{
+    ViewData["Title"] = "كشف تحصيل";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] - NARD</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+        }
+
+        .text-table {
+            font-size: 17px !important
+        }
+
+        .text-footer {
+            font-size: 15px !important
+        }
+
+        .card {
+            border: 0.5px solid #e6e6e6
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <div class="container" dir="rtl">
+        <main role="main">
+            <div class="row printDetails">
+                <div class="col-4 col-xs-4">
+                    <h4> التاريخ : @DateTime.Now.ToString("MM/dd/yyyy hh:mm tt") </h4>
+                    <h4>اسم التاجر : @Model.traderItem.FullName</h4>
+                    <h4>رقم التاجر : @Model.traderItem.MobileNumber1</h4>
+                    <h4>العنوان : @Model.traderItem.Address</h4>
+                </div>
+
+                <div class="col-4 col-xs-4 text-center pt-0 mt-0">
+                    <h3>كشف تحصيل</h3>
+                    <div>
+                        <img src="~/files/Default/LOGO_f_small.png" style="width:100px;" />
+                    </div>
+                </div>
+
+                <div class="col-4 col-xs-4 text-center">
+                    <barcode content="00000001" width="250" height="70" />
+                    <h4><b>00000001</b></h4>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-xs-12">
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <th class="text-table text-center">#</th>
+                                <th class="text-table text-center">الرقم التسلسلي</th>
+                                <th class="text-table text-center">اسم المستقبل</th>
+                                <th class="text-table text-center">عنوان المستقبل</th>
+                                <th class="text-table text-center">المبلغ الكلي</th>
+                                <th class="text-table text-center">مبلغ التوصيل</th>
+                                <th class="text-table text-center">مبلغ البضاعة</th>
+                            </tr>
+                            @for (int i = 0; i < Model.listOrders.Count; i++)
+                            {
+                                <tr>
+                                    <td class="text-table text-center">@(i+1)</td>
+                                    <td class="text-table text-center">@Model.listOrders[i].SerialNumber</td>
+                                    <td class="text-table text-center">@Model.listOrders[i].NameReceiver</td>
+                                    <td class="text-table text-center">@Model.listOrders[i].Address</td>
+                                    <td class="text-table text-center">@Model.listOrders[i].TotalPrice</td>
+                                    <td class="text-table text-center">@(Model.listOrders[i].TotalPrice - Model.listOrders[i].MainPrice)</td>
+                                    <td class="text-table text-center">0.0</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="pt-3 pb-3 text-center"><b>المجموع</b></td>
+                                <td class="pt-3 pb-3"></td>
+                                <td class="pt-3 pb-3"></td>
+                                <td class="pt-3 pb-3"></td>
+                                <td class="pt-3 pb-3 text-center"><b>@Model.listOrders.Sum(x => x.TotalPrice)</b></td>
+                                <td class="pt-3 pb-3 text-center"><b>@Model.listOrders.Sum(x => x.TotalPrice - x.MainPrice)</b></td>
+                                <td class="pt-3 pb-3 text-center"><b>0.0</b></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card shadow rounded">
+                        <div class="card-body">
+                            <hr />
+                            <p style="font-size:20px">
+                                ملاحظات : <b>@Model.noteTahsil</b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

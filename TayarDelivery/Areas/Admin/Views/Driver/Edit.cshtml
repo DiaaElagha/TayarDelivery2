@@ -1,0 +1,140 @@
+﻿@model TayarDelivery.Models.ViewModel.Users.DriverVM
+
+@{
+    ViewData["Title"] = "اضافة تاجر";
+    Layout = null;
+}
+<style>
+    .checkbox {
+        -webkit-transform: scale(1.5, 1.5)
+    }
+</style>
+<form asp-action="Edit" method="post" class="ajaxForm" tname="#dataTableId">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="FullName" class="form-control-label"></label>
+                <input asp-for="FullName" class="form-control">
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="UserName" class="form-control-label"></label>
+                <input autocomplete="false" asp-for="UserName" class="form-control">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label">كلمة المرور</label>
+                <input autocomplete="new-password" type="password" name="Password" class="form-control">
+                <small>كلمة المرور الافتراضية : <b class="text-primary">Admin123$</b></small>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="CanDiscount" asp-for="IsActive" class="form-control-label"></label>
+                <div class="checkbox-list pt-2">
+                    <input class="checkbox" asp-for="IsActive" type="checkbox">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="Email" class="form-control-label"></label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="MobileNumber1" class="form-control-label"></label>
+                <input asp-for="MobileNumber1" class="form-control">
+                <span asp-validation-for="MobileNumber1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="MobileNumber2" class="form-control-label"></label>
+                <input asp-for="MobileNumber2" class="form-control">
+                <span asp-validation-for="MobileNumber2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-group">
+                <label asp-for="Address" class="form-control-label"></label>
+                <input asp-for="Address" class="form-control">
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="AreaId" class="form-control-label"></label>
+                <select asp-for="AreaId" asp-items="ViewBag.AreaList" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
+                    <option value="">اختر المنطقة</option>
+                </select>
+                <span asp-validation-for="AreaId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="PriceTypeId" class="form-control-label"></label>
+                <select asp-for="PriceTypeId" asp-items="ViewBag.PriceTypeList" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
+                    <option value="">اختر نوع السعر</option>
+                </select>
+                <span asp-validation-for="PriceTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="DriverLongitude" class="form-control-label"></label>
+                <input asp-for="DriverLongitude" class="form-control">
+                <span asp-validation-for="DriverLongitude" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="DriverLatitude" class="form-control-label"></label>
+                <input asp-for="DriverLatitude" class="form-control">
+                <span asp-validation-for="DriverLatitude" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="DriverCarNumber" class="form-control-label"></label>
+                <input asp-for="DriverCarNumber" class="form-control">
+                <span asp-validation-for="DriverCarNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="DriverCarModel" class="form-control-label"></label>
+                <input asp-for="DriverCarModel" class="form-control">
+                <span asp-validation-for="DriverCarModel" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="DriverCarType" class="form-control-label"></label>
+                <input asp-for="DriverCarType" class="form-control">
+                <span asp-validation-for="DriverCarType" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="rounded btn btn-secondary" data-dismiss="modal">اغلاق</button>
+    <button type="submit" class="rounded btn btn-primary">ارسال</button>
+</form>
+<script>
+    $('.selectpicker').selectpicker();
+    PageLoadActions();
+</script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

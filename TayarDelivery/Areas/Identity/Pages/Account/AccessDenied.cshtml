@@ -1,0 +1,21 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "غير مسموح بالدخول";
+    Layout = "_LayoutAuth";
+}
+
+    <header>
+        <div class="card p-4">
+            <a href="/">
+                <img alt="Logo" src="~/files/Default/LOGO_f.png" style="height:150px;padding-right:10px" />
+                <b>شركة نرد للبريد السريع</b>
+            </a>
+            <br />
+            <h1 class="text-danger">غير مسموح بالدخول</h1>
+            <p class="text-danger">ليس لديك حق الوصول إلى هذا المسار.</p>
+            <hr />
+            <a href="/" class="btn btn-block btn-brand">الرجوع للرئيسية</a>
+        </div>
+    </header>
+

@@ -1,0 +1,40 @@
+﻿@model TayarDelivery.Models.ViewModel.Auth.UserRolesVM
+
+@{ ViewData["Title"] = "Create";
+                Layout = null; }
+
+<style>
+    .checkbox {
+        -webkit-transform: scale(1.5, 1.5)
+    }
+    .modal-dialog {
+        width: 50%
+    }
+</style>
+
+<form asp-action="UserRoles" method="post" class="ajaxForm" tname="#dataTableId">
+    <div class="p-3 mb-2 bg-info text-white rounded">تحديد صلاحيات المستخدم : @Model.User.FullName</div>
+    <br />
+    <div class="row">
+        <div class="col-6 col-md-6">
+            <div class="form-group">
+                <label asp-for="RolesId" class="text-primary control-label"></label>
+                <select asp-for="RolesId" asp-items="Model.RoleList" title="اختر الصلاحيات" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
+                </select>
+                <span asp-validation-for="RolesId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="حفظ" class="rounded btn btn-primary" />
+        <button type="button" class="rounded btn btn-default waves-effect" data-dismiss="modal">الغاء</button>
+    </div>
+</form>
+
+<partial name="_ValidationScriptsPartial" />
+<script>
+    //inicialization of select picker
+    $('.selectpicker').selectpicker();
+    PageLoadActions();
+</script>

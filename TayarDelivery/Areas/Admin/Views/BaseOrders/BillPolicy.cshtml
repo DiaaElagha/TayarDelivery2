@@ -1,0 +1,174 @@
+﻿@model TayarDelivery.Models.ViewModel.Orders.BillPolicyVM
+@{
+    ViewData["Title"] = "بولصية";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] - NARD</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+        }
+
+        .text-table {
+            font-size:15px!important
+        }
+        .text-footer {
+            font-size: 14px !important
+        }
+        .card {
+            border: 0.5px solid #e6e6e6
+        }
+    </style>
+</head>
+<body>
+    @foreach (var item in Model.OrdersItems)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="container" dir="rtl" style="padding-bottom:100px">
+            <main role="main">
+                <div class="row printDetails">
+                    <div class="col-4 col-xs-4 text-center">
+                        @if (!String.IsNullOrEmpty(item.SerialNumber))
+                        {
+                            <barcode content="@item.SerialNumber" width="250" height="70" />
+                            <span><b>@item.SerialNumber</b></span>
+                        }
+                    </div>
+                    <div class="col-4 col-xs-4 text-center">
+                        <img src="~/files/Default/LOGO_f_small.png" style="width:100px;height:90px" />
+                    </div>
+                    <div class="col-4 col-xs-4">
+                        <h5>هاتف :0</h5>
+                        <h5>جوال :0</h5>
+                        <h5>المشتغل المرخص :0</h5>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-xs-4">
+                        <table style="width:100%">
+                            <tr>
+                                <th class="text-table text-center" colspan="2">تفاصيل الطرد</th>
+                            </tr>
+                            <tr>
+                                <td class="text-table text-center"><b>النوع</b></td>
+                                <td class="text-table text-center"><b>الوزن</b></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">&nbsp;</td>
+                                <td style="border: none!important">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td style="border: none!important">&nbsp;</td>
+                            </tr>
+                        </table>
+
+                        <table style="width:100%">
+                            <tr>
+                                <th class="text-table text-center" colspan="2">مبلغ التحصيل عند الاستلام:</th>
+                            </tr>
+                            <tr>
+                                <td style="border: none!important;padding-right:42px!important" class="text-center" rowspan="2"><b style="font-size:22px">@item.TotalPrice</b></td>
+                                <td style="border: none!important">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td style="border: none!important">&nbsp;</td>
+                            </tr>
+                        </table>
+                        <table style="width:100%">
+                            <tr>
+                                <th class="text-table text-center" colspan="2">المبلغ المستلم بالشيكل:</th>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">&nbsp;</td>
+                                <td style="border: none!important">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td style="border: none!important">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-xs-8">
+                        <table style="width:100%">
+                            <tr>
+                                <th class="text-table text-center" colspan="2">تفاصيل المرسل</th>
+                            </tr>
+                            <tr>
+                                <td class="text-table text-center">الاسم : <b>@item.ApplicationUserTrader.FullName</b></td>
+                                <td class="text-table text-center">المدينة : <b>@item.ApplicationUserTrader.Area.Name</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-table text-right">العنوان بالتفصيل : <b>@item.ApplicationUserTrader.Address</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-table text-right">رقم المحمول : <b>@item.ApplicationUserTrader.MobileNumber1</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-table text-right">رقم المحمول التاني : <b>@item.ApplicationUserTrader.MobileNumber2</b></td>
+                            </tr>
+                        </table>
+
+                        <table style="width:100%">
+                            <tr>
+                                <th class="text-table text-center" colspan="2">تفاصيل المستلم</th>
+                            </tr>
+                            <tr>
+                                <td class="text-table text-center">الاسم : <b>@item.NameReceiver</b></td>
+                                <td class="text-table text-center">المدينة : <b>@item.Area.Name</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-table text-right">العنوان بالتفصيل : <b>@item.Address</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-table text-right">رقم المحمول : <b>@item.PhoneNumberReceiver</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-table text-right">رقم المحمول التاني : <b>@item.PhoneNumberReceiver2</b></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <p>
+                    ملاحظات : <b>00</b>
+                </p>
+                <hr />
+                <br />
+                <div class="row printDetails">
+                    <div class="col-xs-4">
+                        <b class="text-footer">اسم وتوقيع الموزع: .......................................</b>
+                    </div>
+                    <div class="col-xs-4">
+                        <b class="text-footer">اسم وتوقيع الزبون: .......................................</b>
+                    </div>
+                    <div class="col-xs-4">
+                        <b class="text-footer">التاريخ : <span style="font-size:13px">@DateTime.Now.ToString("MM/dd/yyyy hh:mm tt")</span></b>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <span style="font-size:15px">لا تتحمل شركة نرد للخدمات اللوجستية والبريد السريع أي مسؤولية في حال عدم وجود وذكر  التفاصيل اعلاه كما لا تتحمل المسؤولية عن محتوى الطرود بشكل مخالف للقانون</span>
+            </main>
+        </div>
+    }
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>
