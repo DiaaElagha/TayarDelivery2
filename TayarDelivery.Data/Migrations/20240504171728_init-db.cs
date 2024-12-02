@@ -28,9 +28,14 @@ namespace TayarDelivery.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CompanyName = table.Column<string>(nullable: true),
+                    LicensedNumber = table.Column<string>(nullable: true),
                     FilePathCompanyLogo = table.Column<string>(nullable: true),
+                    WorkTime = table.Column<string>(nullable: true),
+                    WhatsUpNumber = table.Column<string>(nullable: true),
                     MobileNumber = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
+                    SupportNumber = table.Column<string>(nullable: true),
+                    SupportEmail = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     facebookLink = table.Column<string>(nullable: true),
                     twitterLink = table.Column<string>(nullable: true),
@@ -43,6 +48,43 @@ namespace TayarDelivery.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CompanyInformation", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HomeInfo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MainTitle = table.Column<string>(nullable: true),
+                    MainTitleColor = table.Column<string>(nullable: true),
+                    SubTitle = table.Column<string>(nullable: true),
+                    SubTitleColor = table.Column<string>(nullable: true),
+                    BackgroundImage = table.Column<string>(nullable: true),
+                    BackgroundImageWidth = table.Column<string>(nullable: true),
+                    BackgroundImageHeight = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HomeInfo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RegisterTrader",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NameSocial = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RegisterTrader", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,6 +119,7 @@ namespace TayarDelivery.Data.Migrations
                     UpdateByUserId = table.Column<string>(nullable: true),
                     UpdateAt = table.Column<DateTime>(nullable: true),
                     Price = table.Column<float>(nullable: true),
+                    DiscountPriceWhenReturn = table.Column<float>(nullable: true),
                     CanDiscount = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -113,6 +156,9 @@ namespace TayarDelivery.Data.Migrations
                     PriceTypeId = table.Column<int>(nullable: true),
                     DriverLongitude = table.Column<double>(nullable: true),
                     DriverLatitude = table.Column<double>(nullable: true),
+                    DriverCarModel = table.Column<string>(nullable: true),
+                    DriverCarType = table.Column<string>(nullable: true),
+                    DriverCarNumber = table.Column<string>(nullable: true),
                     FcmToken = table.Column<string>(nullable: true),
                     AccessToken = table.Column<string>(nullable: true),
                     ConfirmMobileCode = table.Column<int>(nullable: true),
@@ -242,6 +288,44 @@ namespace TayarDelivery.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BillTahsil",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateAt = table.Column<DateTime>(nullable: true),
+                    CreateByUserId = table.Column<string>(nullable: true),
+                    UpdateByUserId = table.Column<string>(nullable: true),
+                    UpdateAt = table.Column<DateTime>(nullable: true),
+                    TraderId = table.Column<string>(nullable: true),
+                    FilePath = table.Column<string>(nullable: true),
+                    TotalPrice = table.Column<float>(nullable: true),
+                    NumberOfOrder = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillTahsil", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BillTahsil_AspNetUsers_CreateByUserId",
+                        column: x => x.CreateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BillTahsil_AspNetUsers_TraderId",
+                        column: x => x.TraderId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BillTahsil_AspNetUsers_UpdateByUserId",
+                        column: x => x.UpdateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ContactUs",
                 columns: table => new
                 {
@@ -275,6 +359,47 @@ namespace TayarDelivery.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Link",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateAt = table.Column<DateTime>(nullable: true),
+                    CreateByUserId = table.Column<string>(nullable: true),
+                    UpdateByUserId = table.Column<string>(nullable: true),
+                    UpdateAt = table.Column<DateTime>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Decription = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    IsShow = table.Column<bool>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false),
+                    IconName = table.Column<string>(nullable: true),
+                    ParentId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Link", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Link_AspNetUsers_CreateByUserId",
+                        column: x => x.CreateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Link_Link_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Link",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Link_AspNetUsers_UpdateByUserId",
+                        column: x => x.UpdateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MessageSMS",
                 columns: table => new
                 {
@@ -297,29 +422,30 @@ namespace TayarDelivery.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Notification",
+                name: "OrderContent",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateAt = table.Column<DateTime>(nullable: true),
+                    CreateByUserId = table.Column<string>(nullable: true),
+                    UpdateByUserId = table.Column<string>(nullable: true),
+                    UpdateAt = table.Column<DateTime>(nullable: true),
                     Title = table.Column<string>(nullable: true),
-                    Message = table.Column<string>(nullable: true),
-                    SendDateAt = table.Column<DateTime>(nullable: true),
-                    ReceverId = table.Column<string>(nullable: true),
-                    SenderId = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Notification", x => x.Id);
+                    table.PrimaryKey("PK_OrderContent", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Notification_AspNetUsers_ReceverId",
-                        column: x => x.ReceverId,
+                        name: "FK_OrderContent_AspNetUsers_CreateByUserId",
+                        column: x => x.CreateByUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Notification_AspNetUsers_SenderId",
-                        column: x => x.SenderId,
+                        name: "FK_OrderContent_AspNetUsers_UpdateByUserId",
+                        column: x => x.UpdateByUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -336,7 +462,8 @@ namespace TayarDelivery.Data.Migrations
                     UpdateByUserId = table.Column<string>(nullable: true),
                     UpdateAt = table.Column<DateTime>(nullable: true),
                     TitlePrograming = table.Column<string>(nullable: true),
-                    TitleView = table.Column<string>(nullable: true)
+                    TitleView = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -416,6 +543,67 @@ namespace TayarDelivery.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Role",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateAt = table.Column<DateTime>(nullable: true),
+                    CreateByUserId = table.Column<string>(nullable: true),
+                    UpdateByUserId = table.Column<string>(nullable: true),
+                    UpdateAt = table.Column<DateTime>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Role_AspNetUsers_CreateByUserId",
+                        column: x => x.CreateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Role_AspNetUsers_UpdateByUserId",
+                        column: x => x.UpdateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Services",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateAt = table.Column<DateTime>(nullable: true),
+                    CreateByUserId = table.Column<string>(nullable: true),
+                    UpdateByUserId = table.Column<string>(nullable: true),
+                    UpdateAt = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    IconName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Services_AspNetUsers_CreateByUserId",
+                        column: x => x.CreateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Services_AspNetUsers_UpdateByUserId",
+                        column: x => x.UpdateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserProfile",
                 columns: table => new
                 {
@@ -486,18 +674,26 @@ namespace TayarDelivery.Data.Migrations
                     Description = table.Column<string>(nullable: true),
                     MainPrice = table.Column<float>(nullable: true),
                     TotalPrice = table.Column<float>(nullable: true),
+                    AdditionalCost = table.Column<float>(nullable: true),
+                    DiscountedCost = table.Column<float>(nullable: true),
                     AllowEdit = table.Column<bool>(nullable: false),
                     IsDeliveredSuccess = table.Column<bool>(nullable: false),
+                    IsIncludeDeliveryPrice = table.Column<bool>(nullable: true),
+                    DriverApprovalStatus = table.Column<bool>(nullable: false),
+                    IsSetDriver = table.Column<bool>(nullable: false),
+                    IsArchive = table.Column<bool>(nullable: false),
                     NoteTrader = table.Column<string>(nullable: true),
                     NoteDriver = table.Column<string>(nullable: true),
                     FilePathTraderSignature = table.Column<string>(nullable: true),
                     CustomerLongitude = table.Column<double>(nullable: true),
                     CustomerLatitude = table.Column<double>(nullable: true),
+                    AreaIdSender = table.Column<int>(nullable: true),
                     AreaIdReceiver = table.Column<int>(nullable: true),
                     UserTraderId = table.Column<string>(nullable: true),
                     UserDriverId = table.Column<string>(nullable: true),
                     OrderStatusId = table.Column<int>(nullable: true),
-                    OrderTypeId = table.Column<int>(nullable: true)
+                    OrderTypeId = table.Column<int>(nullable: true),
+                    OrderContentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -509,9 +705,21 @@ namespace TayarDelivery.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Order_Area_AreaIdSender",
+                        column: x => x.AreaIdSender,
+                        principalTable: "Area",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Order_AspNetUsers_CreateByUserId",
                         column: x => x.CreateByUserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Order_OrderContent_OrderContentId",
+                        column: x => x.OrderContentId,
+                        principalTable: "OrderContent",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -541,6 +749,145 @@ namespace TayarDelivery.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Order_AspNetUsers_UserTraderId",
                         column: x => x.UserTraderId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoleLinks",
+                columns: table => new
+                {
+                    LinkId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleLinks", x => new { x.RoleId, x.LinkId });
+                    table.ForeignKey(
+                        name: "FK_RoleLinks_Link_LinkId",
+                        column: x => x.LinkId,
+                        principalTable: "Link",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleLinks_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RolesUser",
+                columns: table => new
+                {
+                    RoleId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    CreateAt = table.Column<DateTime>(nullable: true),
+                    CreateByUserId = table.Column<string>(nullable: true),
+                    UpdateByUserId = table.Column<string>(nullable: true),
+                    UpdateAt = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RolesUser", x => new { x.RoleId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_RolesUser_AspNetUsers_CreateByUserId",
+                        column: x => x.CreateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RolesUser_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RolesUser_AspNetUsers_UpdateByUserId",
+                        column: x => x.UpdateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RolesUser_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notification",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    IsRead = table.Column<bool>(nullable: false),
+                    SendDateAt = table.Column<DateTime>(nullable: true),
+                    Status = table.Column<bool>(nullable: true),
+                    OrderId = table.Column<int>(nullable: true),
+                    ReceverId = table.Column<string>(nullable: true),
+                    SenderId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notification", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notification_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Notification_AspNetUsers_ReceverId",
+                        column: x => x.ReceverId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Notification_AspNetUsers_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderHistory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateAt = table.Column<DateTime>(nullable: true),
+                    CreateByUserId = table.Column<string>(nullable: true),
+                    UpdateByUserId = table.Column<string>(nullable: true),
+                    UpdateAt = table.Column<DateTime>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    OrderId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderHistory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderHistory_AspNetUsers_CreateByUserId",
+                        column: x => x.CreateByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OrderHistory_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderHistory_AspNetUsers_UpdateByUserId",
+                        column: x => x.UpdateByUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -626,6 +973,21 @@ namespace TayarDelivery.Data.Migrations
                 column: "UserTypeID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BillTahsil_CreateByUserId",
+                table: "BillTahsil",
+                column: "CreateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BillTahsil_TraderId",
+                table: "BillTahsil",
+                column: "TraderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BillTahsil_UpdateByUserId",
+                table: "BillTahsil",
+                column: "UpdateByUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ContactUs_CreateByUserId",
                 table: "ContactUs",
                 column: "CreateByUserId");
@@ -636,9 +998,29 @@ namespace TayarDelivery.Data.Migrations
                 column: "UpdateByUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Link_CreateByUserId",
+                table: "Link",
+                column: "CreateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Link_ParentId",
+                table: "Link",
+                column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Link_UpdateByUserId",
+                table: "Link",
+                column: "UpdateByUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MessageSMS_ReceverId",
                 table: "MessageSMS",
                 column: "ReceverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notification_OrderId",
+                table: "Notification",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notification_ReceverId",
@@ -656,9 +1038,19 @@ namespace TayarDelivery.Data.Migrations
                 column: "AreaIdReceiver");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Order_AreaIdSender",
+                table: "Order",
+                column: "AreaIdSender");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Order_CreateByUserId",
                 table: "Order",
                 column: "CreateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_OrderContentId",
+                table: "Order",
+                column: "OrderContentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_OrderStatusId",
@@ -684,6 +1076,31 @@ namespace TayarDelivery.Data.Migrations
                 name: "IX_Order_UserTraderId",
                 table: "Order",
                 column: "UserTraderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderContent_CreateByUserId",
+                table: "OrderContent",
+                column: "CreateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderContent_UpdateByUserId",
+                table: "OrderContent",
+                column: "UpdateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderHistory_CreateByUserId",
+                table: "OrderHistory",
+                column: "CreateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderHistory_OrderId",
+                table: "OrderHistory",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderHistory_UpdateByUserId",
+                table: "OrderHistory",
+                column: "UpdateByUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderStatus_CreateByUserId",
@@ -713,6 +1130,46 @@ namespace TayarDelivery.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PriceType_UpdateByUserId",
                 table: "PriceType",
+                column: "UpdateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Role_CreateByUserId",
+                table: "Role",
+                column: "CreateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Role_UpdateByUserId",
+                table: "Role",
+                column: "UpdateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleLinks_LinkId",
+                table: "RoleLinks",
+                column: "LinkId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolesUser_CreateByUserId",
+                table: "RolesUser",
+                column: "CreateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolesUser_UpdateByUserId",
+                table: "RolesUser",
+                column: "UpdateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolesUser_UserId",
+                table: "RolesUser",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Services_CreateByUserId",
+                table: "Services",
+                column: "CreateByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Services_UpdateByUserId",
+                table: "Services",
                 column: "UpdateByUserId");
 
             migrationBuilder.CreateIndex(
@@ -827,10 +1284,16 @@ namespace TayarDelivery.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BillTahsil");
+
+            migrationBuilder.DropTable(
                 name: "CompanyInformation");
 
             migrationBuilder.DropTable(
                 name: "ContactUs");
+
+            migrationBuilder.DropTable(
+                name: "HomeInfo");
 
             migrationBuilder.DropTable(
                 name: "MessageSMS");
@@ -839,13 +1302,37 @@ namespace TayarDelivery.Data.Migrations
                 name: "Notification");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "OrderHistory");
+
+            migrationBuilder.DropTable(
+                name: "RegisterTrader");
+
+            migrationBuilder.DropTable(
+                name: "RoleLinks");
+
+            migrationBuilder.DropTable(
+                name: "RolesUser");
+
+            migrationBuilder.DropTable(
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "UserProfile");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Order");
+
+            migrationBuilder.DropTable(
+                name: "Link");
+
+            migrationBuilder.DropTable(
+                name: "Role");
+
+            migrationBuilder.DropTable(
+                name: "OrderContent");
 
             migrationBuilder.DropTable(
                 name: "OrderStatus");

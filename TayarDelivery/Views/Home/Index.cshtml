@@ -74,11 +74,11 @@
     <!-- Mobile Menu -->
     <div class="slider-active">
         <div class="single-slider hero-overly d-flex align-items-center"
-             style="width:@Model.HomeInfo.BackgroundImageWidth!important;
-                    height:@Model.HomeInfo.BackgroundImageHeight!important;
-                    background-image: url('/files/filesSystem/@Model.HomeInfo.BackgroundImage');
-                    background-repeat:round;
-                    background-size:cover;">
+             style="width: 100%;
+                    height:600px!important;
+                    background-image: url('/files/filesSystem/car-cover.jpg');
+                    background-repeat: round;
+                    background-size: cover;">
             <div class="container">
                 <div class="row text-right">
                     <div class="col-xl-9 col-lg-9 col-md-9">
@@ -110,10 +110,14 @@
                         </div>
                         <div class="services-cap pt-2">
                             <h5>
-                                @Model.ListServices[i].Description
-                                <br>
                                 <b>@Model.ListServices[i].Name</b>
                             </h5>
+
+                            <h6 style="font-size:13px!important">
+
+                                @Model.ListServices[i].Description
+                            </h6>
+
                         </div>
                     </div>
                 </div>

@@ -10,8 +10,8 @@ using TayarDelivery.Data.Data;
 namespace TayarDelivery.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210226172605_add-AreaIdSender-order")]
-    partial class addAreaIdSenderorder
+    [Migration("20240504171728_init-db")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,6 +182,15 @@ namespace TayarDelivery.Data.Migrations
 
                     b.Property<DateTime?>("CreateAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DriverCarModel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriverCarNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriverCarType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("DriverLatitude")
                         .HasColumnType("float");
@@ -396,6 +405,33 @@ namespace TayarDelivery.Data.Migrations
                     b.ToTable("HomeInfo");
                 });
 
+            modelBuilder.Entity("TayarDelivery.Entity.Domins.Home.RegisterTrader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameSocial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RegisterTrader");
+                });
+
             modelBuilder.Entity("TayarDelivery.Entity.Domins.Home.Services", b =>
                 {
                     b.Property<int>("Id")
@@ -592,6 +628,12 @@ namespace TayarDelivery.Data.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SupportEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SupportNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("WhatsUpNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -756,6 +798,9 @@ namespace TayarDelivery.Data.Migrations
                     b.Property<string>("NoteTrader")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OrderContentId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("OrderStatusId")
                         .HasColumnType("int");
 
@@ -797,6 +842,8 @@ namespace TayarDelivery.Data.Migrations
 
                     b.HasIndex("CreateByUserId");
 
+                    b.HasIndex("OrderContentId");
+
                     b.HasIndex("OrderStatusId");
 
                     b.HasIndex("OrderTypeId");
@@ -808,6 +855,40 @@ namespace TayarDelivery.Data.Migrations
                     b.HasIndex("UserTraderId");
 
                     b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("TayarDelivery.Entity.Domins.OrderContent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreateByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdateByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreateByUserId");
+
+                    b.HasIndex("UpdateByUserId");
+
+                    b.ToTable("OrderContent");
                 });
 
             modelBuilder.Entity("TayarDelivery.Entity.Domins.OrderHistory", b =>
@@ -1281,6 +1362,10 @@ namespace TayarDelivery.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CreateByUserId");
 
+                    b.HasOne("TayarDelivery.Entity.Domins.OrderContent", "OrderContent")
+                        .WithMany()
+                        .HasForeignKey("OrderContentId");
+
                     b.HasOne("TayarDelivery.Entity.Domins.OrderStatus", "OrderStatus")
                         .WithMany()
                         .HasForeignKey("OrderStatusId");
@@ -1300,6 +1385,17 @@ namespace TayarDelivery.Data.Migrations
                     b.HasOne("TayarDelivery.Entity.Domins.ApplicationUser", "ApplicationUserTrader")
                         .WithMany()
                         .HasForeignKey("UserTraderId");
+                });
+
+            modelBuilder.Entity("TayarDelivery.Entity.Domins.OrderContent", b =>
+                {
+                    b.HasOne("TayarDelivery.Entity.Domins.ApplicationUser", "ApplicationUserCreate")
+                        .WithMany()
+                        .HasForeignKey("CreateByUserId");
+
+                    b.HasOne("TayarDelivery.Entity.Domins.ApplicationUser", "ApplicationUserUpdate")
+                        .WithMany()
+                        .HasForeignKey("UpdateByUserId");
                 });
 
             modelBuilder.Entity("TayarDelivery.Entity.Domins.OrderHistory", b =>
