@@ -236,7 +236,7 @@
                                                                     <div class="col-md-9">
                                                                         <h5 class="card-title text-primary">اجمالي التكلفة</h5>
                                                                         <h4 class="card-text font-weight-bold">
-                                                                            @Model.Order.TotalPrice ₪
+                                                                            @Model.Order.TotalPrice $
                                                                         </h4>
                                                                     </div>
                                                                     <div class="col-md-3">
@@ -253,7 +253,7 @@
                                                                     <div class="col-md-9">
                                                                         <h5 class="card-title text-primary">تكلفة المنتج</h5>
                                                                         <h4 class="card-text font-weight-bold">
-                                                                            @Model.Order.MainPrice ₪
+                                                                            @Model.Order.MainPrice $
                                                                         </h4>
                                                                     </div>
                                                                     <div class="col-md-3">
@@ -270,9 +270,9 @@
                                                                     <div class="col-md-9">
                                                                         <h5 class="card-title text-primary">تكلفة التوصيل</h5>
                                                                         <h4 class="card-text font-weight-bold">
-                                                                            @(Model.Order.TotalPrice - Model.Order.MainPrice) ₪
-                                                                            <small style="font-size:11px">المضافة : <b>@Model.Order.AdditionalCost ₪</b></small>
-                                                                            <small style="font-size:11px">المخصومة : <b>@Model.Order.DiscountedCost ₪</b></small>
+                                                                            @(Model.Order.TotalPrice - Model.Order.MainPrice) $
+                                                                            <small style="font-size:11px">المضافة : <b>@Model.Order.AdditionalCost $</b></small>
+                                                                            <small style="font-size:11px">المخصومة : <b>@Model.Order.DiscountedCost $</b></small>
                                                                         </h4>
                                                                     </div>
                                                                     <div class="col-md-3">

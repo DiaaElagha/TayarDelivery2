@@ -121,7 +121,6 @@ namespace TayarDelivery.Areas.Admin.Controllers
                     traderId: UserId,
                     areaIdReceiver: model.AreaIdReceiver,
                     areaIdSender: GetUser().Area.Id,
-                    orderTypeId: model.OrderTypeId,
                     isIncludeDeliveryPrice: false);
 
                 if (totalPrice != -1 && totalPrice != 0)
@@ -197,7 +196,6 @@ namespace TayarDelivery.Areas.Admin.Controllers
                         traderId: UserId,
                         areaIdReceiver: model.AreaIdReceiver,
                         areaIdSender: GetUser().AreaId.Value,
-                        orderTypeId: model.OrderTypeId,
                         isIncludeDeliveryPrice: false);
 
                     if (totalPrice != -1 && totalPrice != 0)

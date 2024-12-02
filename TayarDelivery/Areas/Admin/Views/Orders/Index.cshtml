@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "الطرود";
+    ViewData["Title"] = "الطلبات";
 }
 
 @section Css{
@@ -38,7 +38,7 @@
                 <i class="kt-font-brand flaticon2-user-1"></i>
             </span>
             <h3 class="kt-portlet__head-title">
-                جدول الطرود في النظام
+                جدول الطلبات في النظام
             </h3>
         </div>
         <div class="kt-portlet__head-toolbar text-right" style="width:60%">
@@ -49,7 +49,7 @@
                             <option value="-1">توكيل سائق</option>
                         </select>
                     </span>
-                    <span title="تغيير حالة الطرود" data-toggle="kt-tooltip" data-placement="top">
+                    <span title="تغيير حالة الطلبات" data-toggle="kt-tooltip" data-placement="top">
                         <select id="change-orders-status" asp-items="ViewBag.listOrderStatuses" class="rounded selectpicker border border-primary" data-width="25%">
                             <option value="-1">تغيير الحالة</option>
                         </select>
@@ -88,7 +88,7 @@
                 <div class="col-md-11">
                     <div class="row">
                         <div class="col-md-5">
-                            <input class="form-control" title="بحث برقم الطرد او رقم الجوال" data-toggle="kt-tooltip" data-placement="top" type="search" placeholder="ابحث برقم الطرد او جوال المستقبل او العنوان ..." name="SearchKey">
+                            <input class="form-control" title="بحث برقم الطلب او رقم الجوال" data-toggle="kt-tooltip" data-placement="top" type="search" placeholder="ابحث برقم الطلب او جوال المستقبل او العنوان ..." name="SearchKey">
                         </div>
                         <div class="col-5 col-md">
                             <div class="rounded m-input-icon m-input-icon--right">
@@ -121,12 +121,12 @@
             <div class="row mt-3">
                 <div class="col-md-2">
                     <select id="orderStatusId" asp-items="ViewBag.listOrderStatuses" data-size="4" data-live-search="true" class="rounded selectpicker select-filter" data-width="100%">
-                        <option value="-1">حالة الطرد</option>
+                        <option value="-1">حالة الطلب</option>
                     </select>
                 </div>
                 <div class="col-md-2">
                     <select id="orderTypeId" asp-items="ViewBag.listOrderTypes" data-size="4" data-live-search="true" class="rounded selectpicker select-filter" data-width="100%">
-                        <option value="-1">نوع الطرد</option>
+                        <option value="-1">نوع الطلب</option>
                     </select>
                 </div>
                 <div class="col-md-2">
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-md-2">
                     <select id="driverId" asp-items="ViewBag.listDrivers" data-size="4" data-live-search="true" class="rounded selectpicker select-filter" data-width="100%">
-                        <option value="-1">موصل الطرد</option>
+                        <option value="-1">موصل الطلب</option>
                     </select>
                 </div>
             </div>
@@ -167,7 +167,7 @@
                     <th>رقم_الجوال</th>
                     <th>التاجر</th>
                     <th width="17%">العنوان</th>
-                    <th>حالة_الطرد</th>
+                    <th>حالة_الطلب</th>
                     <th class="sum">التحصيل</th>
                     <th>تاريخ الانشاء</th>
                     <th width="13%">العمليات</th>
@@ -330,7 +330,7 @@
                         },
                         {
                             "render": function (data, type, row) {
-                                return '<input name="total-price-value" type="hidden" value="' + parseInt(row["TotalPrice"]) + '" /><input name="total-delivery-value" type="hidden" value="' + parseInt((parseInt(row["TotalPrice"]) - parseInt(row["MainPrice"]))) + '" /><b>' + row["TotalPrice"] + ' ₪</b> <br /> <small> التوصيل : <b>' + (parseInt(row["TotalPrice"]) - parseInt(row["MainPrice"])) + ' ₪</b></small><br /> <small> الاساسي : <b>' + parseInt(row["MainPrice"]) + ' ₪</b></small>';
+                                return '<input name="total-price-value" type="hidden" value="' + parseInt(row["TotalPrice"]) + '" /><input name="total-delivery-value" type="hidden" value="' + parseInt((parseInt(row["TotalPrice"]) - parseInt(row["MainPrice"]))) + '" /><b>' + row["TotalPrice"] + ' $</b> <br /> <small> التوصيل : <b>' + (parseInt(row["TotalPrice"]) - parseInt(row["MainPrice"])) + ' $</b></small><br /> <small> الاساسي : <b>' + parseInt(row["MainPrice"]) + ' $</b></small>';
                             }
                         },
                         {
@@ -350,12 +350,12 @@
                                 //    + '<a href="#" class="m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">'
                                 //    + '<i class="la la-ellipsis-h"></i></a>'
                                 //    + '<div class="dropdown-menu dropdown-menu-right">'
-                                //    + '<a class="dropdown-item text-primary" tname="#dataTableId" href="/Admin/BaseOrders/OrderTimeLine/' + row["OrderId"] + '"><i class="la la-history text-primary"></i> تفاصيل الطرد</a>'
+                                //    + '<a class="dropdown-item text-primary" tname="#dataTableId" href="/Admin/BaseOrders/OrderTimeLine/' + row["OrderId"] + '"><i class="la la-history text-primary"></i> تفاصيل الطلب</a>'
                                 //    + '</div></span>';
 
-                                data += '<a href="/Admin/BaseOrders/OrderTimeLine/' + row["OrderId"] + '" title="تفاصيل الطرد" class="m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-list text-primary"></i></a>';
+                                data += '<a href="/Admin/BaseOrders/OrderTimeLine/' + row["OrderId"] + '" title="تفاصيل الطلب" class="m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-list text-primary"></i></a>';
                                 if (row["AllowEdit"]) {
-                                    data += '<a href="/Admin/Orders/Edit/' + row["OrderId"] + '" title="تعديل الطرد" class="PopUp m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit text-primary"></i></a>';
+                                    data += '<a href="/Admin/Orders/Edit/' + row["OrderId"] + '" title="تعديل الطلب" class="PopUp m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit text-primary"></i></a>';
                                 }
                                 data += '<span class="dropdown">'
                                     + '<a href="#" class="m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">'
@@ -371,9 +371,9 @@
                                     + '</form>'
                                     + '</div></span>';
                                 if (row["IsArchive"]) {
-                                    data += '<a href="/Admin/BaseOrders/ArchiveOrder/' + row["OrderId"] + '" tname="#dataTableId" title="الغاء ارشفة الطرد" class="Confirm m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-archive text-warning"></i></a>';
+                                    data += '<a href="/Admin/BaseOrders/ArchiveOrder/' + row["OrderId"] + '" tname="#dataTableId" title="الغاء ارشفة الطلب" class="Confirm m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-archive text-warning"></i></a>';
                                 } else {
-                                    data += '<a href="/Admin/BaseOrders/ArchiveOrder/' + row["OrderId"] + '"  tname="#dataTableId" title="ارشفة الطرد" class="Confirm m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-archive text-primary"></i></a>';
+                                    data += '<a href="/Admin/BaseOrders/ArchiveOrder/' + row["OrderId"] + '"  tname="#dataTableId" title="ارشفة الطلب" class="Confirm m-0 p-0 btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-archive text-primary"></i></a>';
                                 }
 
                                 return data;
@@ -404,5 +404,5 @@
     </script>
 
 
-    <script src="~/js/JS_Base_Order.js"></script>
+    <script src="~/js/JS_Base_Order.js"  asp-append-version="true"></script>
 }

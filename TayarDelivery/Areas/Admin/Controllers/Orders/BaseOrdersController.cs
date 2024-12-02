@@ -518,7 +518,7 @@ namespace TayarDelivery.Areas.Admin.Controllers
 
         [HttpPost]
         public async Task<float> CalculateOrderPrice(float mainPrice, float? additionalCost,
-            float? discountedCost, string traderId, int areaIdReceiver, int areaIdSender, int orderTypeId)
+            float? discountedCost, string traderId, int areaIdReceiver, int areaIdSender)
         {
             try
             {
@@ -529,7 +529,6 @@ namespace TayarDelivery.Areas.Admin.Controllers
                    traderId: traderId,
                    areaIdReceiver: areaIdReceiver,
                    areaIdSender: areaIdSender,
-                   orderTypeId: orderTypeId,
                    isIncludeDeliveryPrice: false);
                 return totalPrice;
             }

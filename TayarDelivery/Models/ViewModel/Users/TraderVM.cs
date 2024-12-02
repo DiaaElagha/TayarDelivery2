@@ -41,9 +41,5 @@ namespace TayarDelivery.Models.ViewModel.Users
         [Display(Name = "منطقة التاجر")]
         public int? AreaId { get; set; }
 
-        [Required(ErrorMessage = "يرجى ادخال نوع السعر")]
-        [Display(Name = "نوع السعر")]
-        public int? PriceTypeId { get; set; }
-
     }
 }

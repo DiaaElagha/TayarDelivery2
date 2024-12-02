@@ -442,7 +442,6 @@ namespace TayarDelivery.API.Controllers
                    traderId: itemUser.Id,
                    areaIdReceiver: calculateDTO.areaIdReceiver,
                    areaIdSender: calculateDTO.areaIdSender,
-                   orderTypeId: calculateDTO.orderTypeId,
                    isIncludeDeliveryPrice: calculateDTO.isIncludeDeliveryPrice);
                 return GetResponse(ResponseMessages.READ, true, totalPrice);
             }

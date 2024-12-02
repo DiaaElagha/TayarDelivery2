@@ -1,7 +1,7 @@
 ﻿@model TayarDelivery.Models.ViewModel.OrderVM
 
 @{
-    ViewData["Title"] = "تعديل طرد";
+    ViewData["Title"] = "اضافة طرد";
     Layout = null;
 }
 <style>
@@ -9,41 +9,36 @@
         -webkit-transform: scale(1.5, 1.5)
     }
 </style>
+
 <form asp-action="Edit" method="post" class="ajaxForm" tname="#dataTableId">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
+                <label asp-for="Title" class="form-control-label"></label>
+                <input asp-for="Title" class="form-control">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
                 <label asp-for="OrderContentId" class="form-control-label"></label>
-                <select asp-for="OrderContentId" id="area-id-receiver" asp-items="ViewBag.listOrderContent" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
+                <select asp-for="OrderContentId" asp-items="ViewBag.listOrderContent" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
                     <option value="">اختر المحتوى</option>
                 </select>
                 <span asp-validation-for="OrderContentId" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md-3">
+
+        <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="NameReceiver" class="form-control-label"></label>
-                <input asp-for="NameReceiver" class="form-control">
-                <span asp-validation-for="NameReceiver" class="text-danger"></span>
+                <label asp-for="AreaIdSender" class="form-control-label"></label>
+                <select asp-for="AreaIdSender" id="area-id-sender" asp-items="ViewBag.listAreas" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
+                    <option value="">اختر المنطقة</option>
+                </select>
+                <span asp-validation-for="AreaIdSender" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md">
-            <div class="form-group">
-                <label asp-for="PhoneNumberReceiver" class="form-control-label"></label>
-                <input asp-for="PhoneNumberReceiver" class="form-control">
-                <span asp-validation-for="PhoneNumberReceiver" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md">
-            <div class="form-group">
-                <label asp-for="PhoneNumberReceiver2" class="form-control-label"></label>
-                <input asp-for="PhoneNumberReceiver2" class="form-control">
-                <span asp-validation-for="PhoneNumberReceiver2" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="AreaIdReceiver" class="form-control-label"></label>
                 <select asp-for="AreaIdReceiver" id="area-id-receiver" asp-items="ViewBag.listAreas" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
@@ -52,32 +47,7 @@
                 <span asp-validation-for="AreaIdReceiver" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="Address" class="form-control-label"></label>
-                <input asp-for="Address" class="form-control">
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-        </div>
 
-        <div class="col-md-3">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md col-6">
-                        <label asp-for="OrderTypeId" class="form-control-label"></label>
-                    </div>
-                    <div class="col-md col-6 text-right">
-                        <small id="ordertype-id-title" class="text-danger font-weight-bold"></small>
-                    </div>
-                </div>
-                <select asp-for="OrderTypeId" id="order-type-id" asp-items="ViewBag.listOrderTypes" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
-                    <option value="">اختر النوع</option>
-                </select>
-                <span asp-validation-for="OrderTypeId" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <div class="row">
@@ -94,16 +64,38 @@
                 <span asp-validation-for="UserTraderId" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md-3">
+    </div>
+    <div class="row">
+        <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="AreaIdSender" class="form-control-label"></label>
-                <select asp-for="AreaIdSender" id="area-id-sender" asp-items="ViewBag.listAreas" data-size="6" data-live-search="true" class="rounded selectpicker" data-width="100%">
-                    @*<option value="">اختر المنطقة</option>*@
-                </select>
-                <span asp-validation-for="AreaIdSender" class="text-danger"></span>
+                <label asp-for="NameReceiver" class="form-control-label"></label>
+                <input asp-for="NameReceiver" class="form-control">
+                <span asp-validation-for="NameReceiver" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="PhoneNumberReceiver" class="form-control-label"></label>
+                <input asp-for="PhoneNumberReceiver" class="form-control">
+                <span asp-validation-for="PhoneNumberReceiver" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="PhoneNumberReceiver2" class="form-control-label"></label>
+                <input asp-for="PhoneNumberReceiver2" class="form-control">
+                <span asp-validation-for="PhoneNumberReceiver2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label asp-for="Address" class="form-control-label"></label>
+                <input asp-for="Address" class="form-control">
+                <span asp-validation-for="Address" class="text-danger"></span>
             </div>
         </div>
     </div>
+
     <div class="card rounded shadow-sm border-secondary p-3 mb-3">
         <div class="row">
             <div class="col-md-3">
@@ -133,14 +125,14 @@
                         سعر الاجمالي :
                     </span>
                     <b class="text-success" id="total-price-calculate">0</b>
-                    <span> ₪ </span>
+                    <span> $ </span>
                 </h5><br />
                 <h5>
                     <span class="text-primary">
                         سعر التوصيل :
                     </span>
                     <b class="text-success" id="total-delivary-calculate">0</b>
-                    <span> ₪ </span>
+                    <span> $ </span>
                 </h5>
             </div>
 
@@ -159,14 +151,20 @@
     <button type="button" class="rounded btn btn-secondary" data-dismiss="modal">اغلاق</button>
     <button type="submit" class="rounded btn btn-primary">ارسال</button>
 </form>
-
 <input value="@Model.UserTraderId" type="hidden" id="trader-edit-val" />
+
 <script>
     $('.selectpicker').selectpicker();
+</script>
+<script>
     PageLoadActions();
 </script>
 
-<script src="~/js/dynamic-calculate.js"></script>
 
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/js/dynamic-calculate.js" asp-append-version="true"></script>
+
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"  asp-append-version="true"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"  asp-append-version="true"></script>
+
+

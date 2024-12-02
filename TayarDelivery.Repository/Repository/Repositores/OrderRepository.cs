@@ -24,7 +24,7 @@ namespace TayarDelivery.Repository.Repository.Repositores
 
         public async Task<float> CalculateOrderPrice(
             float mainPrice, float? additionalCost, float? discountedCost,
-            string traderId, int areaIdReceiver, int areaIdSender, int orderTypeId, bool isIncludeDeliveryPrice)
+            string traderId, int areaIdReceiver, int areaIdSender, bool isIncludeDeliveryPrice)
         {
             var traderEntity = await _userManager.Users.Include(x => x.PriceType).SingleOrDefaultAsync(x => x.Id.Equals(traderId));
             if (traderEntity != null)
@@ -35,19 +35,17 @@ namespace TayarDelivery.Repository.Repository.Repositores
                 var areaPrice = await _DbContext.AreasPrice.FirstOrDefaultAsync(x =>
                     (x.ReceverAreaId == areaIdReceiver && x.DealerAreaId == areaIdSender)
                     || (x.ReceverAreaId == areaIdSender && x.DealerAreaId == areaIdReceiver));
-
-                var orderType = await _DbContext.OrderType.FindAsync(orderTypeId);
                 
-                if (orderType != null && areaPrice != null)
+                if (areaPrice != null)
                 {
                     if (!isIncludeDeliveryPrice)
                     {
                         priceDelvery = areaPrice.Price;
-                        orderTypeDiscount = orderType.DiscountPercentage;
+                        orderTypeDiscount = 0;
                     }
                     else
                     {
-                        mainPrice = (mainPrice - (areaPrice.Price.HasValue ? areaPrice.Price.Value : 0)) - orderType.DiscountPercentage.Value;
+                        mainPrice = (mainPrice - (areaPrice.Price.HasValue ? areaPrice.Price.Value : 0)) - 0;
                         orderTypeDiscount = 0;
                     }
                     if (additionalCost.HasValue)
@@ -61,7 +59,7 @@ namespace TayarDelivery.Repository.Repository.Repositores
                     float? totalPrice = ExtensionMethods.GetTotalPriceOrder(
                                price: priceDelvery,
                                mainPrice: mainPrice,
-                               discount: traderEntity.PriceType.DiscountPercentage,
+                               discount: 0,
                                plus: orderTypeDiscount);
                     return totalPrice.HasValue ? totalPrice.Value : 0;
                 }

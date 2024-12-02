@@ -9,6 +9,6 @@ namespace TayarDelivery.Repository.Repository.Interfaces
     {
         Task<float> CalculateOrderPrice(
             float mainPrice, float? additionalCost, float? discountedCost,
-            string traderId, int areaIdReceiver, int areaIdSender, int orderTypeId, bool isIncludeDeliveryPrice);
+            string traderId, int areaIdReceiver, int areaIdSender, bool isIncludeDeliveryPrice);
     }
 }

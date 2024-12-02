@@ -1,4 +1,5 @@
-﻿$("#main-price").change(function () {
+﻿
+$("#main-price").change(function () {
     if (checkHasValue()) {
         calculatefunction();
     }
@@ -29,14 +30,14 @@ $.ajax({
         if ($("#trader-edit-val").val()) {
             $(Data).each(function (index, value) {
                 if (value.TraderId == $("#trader-edit-val").val()) {
-                    $("#trader-Id").append($("<option selected data-value='" + value.AreaId + "' data-subtext='( " + value.AreaName + " - " + value.PriceTypeValue + ")'></option>").val(value.TraderId).html(value.TraderName)).selectpicker('refresh');
+                    $("#trader-Id").append($("<option selected data-value='" + value.AreaId + "' data-subtext='( " + value.AreaName + ")'></option>").val(value.TraderId).html(value.TraderName)).selectpicker('refresh');
                 } else {
-                    $("#trader-Id").append($("<option data-value='" + value.AreaId + "' data-subtext='( " + value.AreaName + "  - " + value.PriceTypeValue + ")'></option>").val(value.TraderId).html(value.TraderName)).selectpicker('refresh');
+                    $("#trader-Id").append($("<option data-value='" + value.AreaId + "' data-subtext='( " + value.AreaName + ")'></option>").val(value.TraderId).html(value.TraderName)).selectpicker('refresh');
                 }
             })
         } else {
             $(Data).each(function (index, value) {
-                $("#trader-Id").append($("<option data-value='" + value.AreaId + "' data-subtext='( " + value.AreaName + "  - " + value.PriceTypeValue + ")'></option>").val(value.TraderId).html(value.TraderName)).selectpicker('refresh');
+                $("#trader-Id").append($("<option data-value='" + value.AreaId + "' data-subtext='( " + value.AreaName + ")'></option>").val(value.TraderId).html(value.TraderName)).selectpicker('refresh');
             })
         }
     },
@@ -82,28 +83,6 @@ $('#area-id-receiver').on('change', function () {
     }
 });
 
-$('#order-type-id').on('change', function () {
-    const typeId = $(this).find(":selected").val();
-    if (typeId) {
-        jQuery.ajax({
-            type: 'GET',
-            url: '/Admin/BaseOrders/GetTypeAddPrice?typeid=' + typeId,
-            success: function (response) {
-                console.log("response :" + response);
-                if (response != "-1") {
-                    $('#ordertype-id-title').html("الزيادة : " + response);
-                }
-            }, complete: function (response) {
-                if (checkHasValue()) {
-                    calculatefunction();
-                }
-            }
-        });
-    } else {
-        $('#ordertype-id-title').html("");
-    }
-});
-
 function calculatefunction() {
     jQuery.ajax({
         type: 'POST',
@@ -114,8 +93,7 @@ function calculatefunction() {
             "discountedCost": $('#discounted-cost').val(),
             "traderId": $('#trader-Id').val(),
             "areaIdReceiver": $('#area-id-receiver').val(),
-            "areaIdSender": $('#area-id-sender').val(),
-            "orderTypeId": $('#order-type-id').val(),
+            "areaIdSender": $('#area-id-sender').val()
         },
         success: function (response) {
             if (response) {
@@ -132,12 +110,13 @@ function calculatefunction() {
 }
 
 function checkHasValue() {
+
+    console.log("tue");
+
     if ($('#main-price').val()
         && $('#trader-Id').val()
         && $('#area-id-receiver').val()
-        && $('#area-id-sender').val()
-        && $('#order-type-id').val()) {
-        console.log("tue");
+        && $('#area-id-sender').val()) {
         return true;
     } else {
         return false;

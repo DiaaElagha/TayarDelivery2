@@ -40,9 +40,9 @@ function columnfooterfunction() {
     console.log("sum : " + sum);
     console.log("sumDelivery : " + sumDelivery);
 
-    var data = '<b class="mr-4">اجمالي التحصيل : <b style="color:#0a640b">' + sum + '</b> ₪</b>';
-    data += '<b class="mr-4">اجمالي المنتجات : <b style="color:#0a640b">' + (sum - sumDelivery) + '</b>  ₪</b>';
-    data += '<b class="mr-4">اجمالي التوصيل : <b style="color:#0a640b">' + sumDelivery + '</b> ₪</b>';
+    var data = '<b class="mr-4">اجمالي التحصيل : <b style="color:#0a640b">' + sum + '</b> $</b>';
+    data += '<b class="mr-4">اجمالي المنتجات : <b style="color:#0a640b">' + (sum - sumDelivery) + '</b>  $</b>';
+    data += '<b class="mr-4">اجمالي التوصيل : <b style="color:#0a640b">' + sumDelivery + '</b> $</b>';
 
     $("#columnfooter").html(data);
 }

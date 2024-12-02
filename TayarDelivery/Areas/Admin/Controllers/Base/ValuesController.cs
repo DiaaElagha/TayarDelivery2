@@ -32,13 +32,12 @@ namespace TayarDelivery.Areas.Admin.Controllers.Base
 
         public async Task<IActionResult> GetTradersFullData()
         {
-            var listUsers = await _userManager.Users.Include(x => x.UserType).Include(x => x.PriceType).Include(x => x.Area)
+            var listUsers = await _userManager.Users.Include(x => x.UserType).Include(x => x.Area)
                 .Where(x => x.IsActive && x.UserType.TitlePrograming.Equals(UserTypeValues.TRADER))
                 .Select(x => new
                 {
                     AreaId = x.Area != null ? x.Area.Id : 0,
                     AreaName = x.Area != null ? x.Area.Name : "",
-                    PriceTypeValue = x.PriceType != null ? x.PriceType.DiscountPercentage : 0,
                     TraderId = x.Id,
                     TraderName = x.FullName,
                 }).ToListAsync();

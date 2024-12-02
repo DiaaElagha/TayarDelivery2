@@ -266,7 +266,7 @@
                         },
                         {
                             "render": function (data, type, row) {
-                                return '<input name="total-price-value" type="hidden" value="' + parseInt(row["TotalPrice"]) + '" /><input name="total-delivery-value" type="hidden" value="' + parseInt((parseInt(row["TotalPrice"]) - parseInt(row["MainPrice"]))) + '" /><b>' + row["TotalPrice"] + ' ₪</b> <br /> <small> التوصيل : <b>' + (parseInt(row["TotalPrice"]) - parseInt(row["MainPrice"])) + ' ₪</b></small><br /> <small> الاساسي : <b>' + parseInt(row["MainPrice"]) + ' ₪</b></small>';
+                                return '<input name="total-price-value" type="hidden" value="' + parseInt(row["TotalPrice"]) + '" /><input name="total-delivery-value" type="hidden" value="' + parseInt((parseInt(row["TotalPrice"]) - parseInt(row["MainPrice"]))) + '" /><b>' + row["TotalPrice"] + ' $</b> <br /> <small> التوصيل : <b>' + (parseInt(row["TotalPrice"]) - parseInt(row["MainPrice"])) + ' $</b></small><br /> <small> الاساسي : <b>' + parseInt(row["MainPrice"]) + ' $</b></small>';
                             }
                         },
                         {

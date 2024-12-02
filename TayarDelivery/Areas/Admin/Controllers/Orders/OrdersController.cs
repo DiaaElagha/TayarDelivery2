@@ -21,7 +21,7 @@ using TayarDelivery.Repository.Repository.Interfaces;
 
 namespace TayarDelivery.Areas.Admin.Controllers
 {
-    //[Authorize(Roles = "administrator,manager,accountant")]
+    [Authorize(Roles = "administrator,manager,accountant")]
     public class OrdersController : BaseController
     {
         protected readonly IBaseRepository<Order> _orderRepository;
@@ -114,7 +114,6 @@ namespace TayarDelivery.Areas.Admin.Controllers
                     traderId: model.UserTraderId,
                     areaIdReceiver: model.AreaIdReceiver,
                     areaIdSender: model.AreaIdSender,
-                    orderTypeId: model.OrderTypeId,
                     isIncludeDeliveryPrice: false);
 
                 if (totalPrice != -1 && totalPrice != 0)
@@ -186,7 +185,6 @@ namespace TayarDelivery.Areas.Admin.Controllers
                         traderId: model.UserTraderId,
                         areaIdReceiver: model.AreaIdReceiver,
                         areaIdSender: model.AreaIdSender,
-                        orderTypeId: model.OrderTypeId,
                         isIncludeDeliveryPrice: false);
 
                     if (totalPrice != -1 && totalPrice != 0)

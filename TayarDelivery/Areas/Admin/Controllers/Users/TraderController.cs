@@ -68,7 +68,6 @@ namespace TayarDelivery.Areas.Admin.Controllers.Users
                 Mobile2 = String.IsNullOrEmpty(x.MobileNumber2) ? "" : x.MobileNumber2,
                 x.IsActive,
                 AreaName = x.Area.Name,
-                PriceTypeName = x.PriceType.Name,
                 createAt = x.CreateAt.Value.ToString("MM/dd/yyyy"),
             }).Skip(d.Start).Take(d.Length).ToList();
             var result =
